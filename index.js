@@ -8,6 +8,8 @@ import cors from 'cors'
 
 const app = express()
 
+const port = process.env.PORT || 3000
+
 app.use(cors())
 app.use(express.static('public'))
 app.use(morgan('combined'))
@@ -37,6 +39,6 @@ mongoose.connect(
   }
 )
 
-app.listen(process.env.PORT || 3000, () =>
-  console.log('Server listening on port ' + process.env.PORT)
+app.listen(port, () =>
+  console.log('Server listening on port ' + port)
 )
