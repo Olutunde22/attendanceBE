@@ -1,4 +1,3 @@
-import generateToken from '../services/generateToken.js'
 import Lecturer from '../services/lecturer.js'
 
 const signup = async (req, res) => {
@@ -24,8 +23,7 @@ const signup = async (req, res) => {
             id: lecturer[1]._id,
             firstName: lecturer[1].firstName,
             lastName: lecturer[1].lastName,
-            email: lecturer[1].email,
-            token: generateToken(lecturer[1]._id)
+            email: lecturer[1].email
         })
     }
 
@@ -47,11 +45,10 @@ const login = async (req, res) => {
             id: lecturer[1]._id,
             firstName: lecturer[1].firstName,
             lastName: lecturer[1].lastName,
-            email: lecturer[1].email,
-            token: generateToken(lecturer[1]._id)
+            email: lecturer[1].email
         })
     }
-
 }
+
 
 export default { signup, login }

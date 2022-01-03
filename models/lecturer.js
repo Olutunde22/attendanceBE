@@ -14,7 +14,7 @@ const lecturerSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Password is required'],
-      min: [5, 'Password is too short']
+      min: [6, 'Password is too short']
     },
     salt: String,
   },
