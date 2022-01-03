@@ -59,7 +59,7 @@ const getClasses = async (id) => {
 
 const getClassParticipants = async (id) => {
     try {
-        const foundClass = awaitClass.findById(id)
+        const foundClass = await Class.findById(id)
         return foundClass
     } catch (error) {
         return false
