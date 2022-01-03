@@ -1,5 +1,5 @@
 import Class from '../models/class.js'
-import Lecturer from '../models/lecturer.js'
+import Student from '../models/student.js'
 
 const create = async ({ className, createdBy }) => {
     try {
@@ -13,14 +13,33 @@ const create = async ({ className, createdBy }) => {
 }
 //Create new class
 
-const addStudentToClass = async ({ createdBy, }) => {
-
+const addStudentToClass = async ({ studentId, classId }) => {
+    try {
+        const student = await Student.findOne({ matricNumber: studentId })
+        const participantInfo = {
+            studentName: student.firstName + " " + student.lastName,
+            studentMatricNumber: student.matricNumber,
+            studentCourse: student.course,
+            studentLevel: student.level,
+            time: Date.now().toString()
+        }
+        const foundClass = await Class.findById(classId)
+        const found = foundClass.participants.find((stu) => stu.studentMatricNumber === studentId)
+        if (!found) {
+            foundClass.participants.push(participantInfo)
+            await foundClass.save()
+        } else {
+            return true
+        }
+    } catch (error) {
+        return false
+    }
 }
 //Add student to class
 
 const getClasses = async (id) => {
     try {
-        const foundClasses = await Class.find({ createdBy: id }).populate()
+        const foundClasses = await Class.find({ createdBy: id })
         const hello = []
         foundClasses.forEach((foundClass) => {
             const newObj = {
@@ -37,9 +56,18 @@ const getClasses = async (id) => {
         return false
     }
 }
-//View all classes by specific lecturer
 
+const getClassParticipants = async (id) => {
+    try {
+        const foundClass = awaitClass.findById(id)
+        return foundClass
+    } catch (error) {
+        return false
+    }
+}
 export default {
     create,
-    getClasses
+    getClasses,
+    addStudentToClass,
+    getClassParticipants
 }

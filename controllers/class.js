@@ -19,4 +19,25 @@ const getClasses = async (req, res) => {
 
 }
 
-export default { createClass, getClasses }
+const addStudentToClass = async (req, res) => {
+    const add = await Class.addStudentToClass(req.body)
+    if (add === false) {
+        return res.status(400).json({ message: 'Error adding Student, please scan again' })
+    } else if (add === true) {
+        return res.status(200).json({ message: 'Student already in class' })
+    } else {
+        return res.status(200).json({ message: 'Success' })
+    }
+}
+
+const getClassParticipants = async (req, res) => {
+    const oneclass = await Class.getClassParticipants(req.params.id)
+    if (oneclass === false) {
+        return res.status(400).json({ message: 'Error getting Participants' })
+    } else {
+        return res.status(200).json(oneclass)
+    }
+}
+
+
+export default { createClass, getClasses, addStudentToClass, getClassParticipants }
