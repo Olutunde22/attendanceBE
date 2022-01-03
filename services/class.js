@@ -1,5 +1,6 @@
 import Class from '../models/class.js'
 import Student from '../models/student.js'
+import moment from 'moment'
 
 const create = async ({ className, createdBy }) => {
     try {
@@ -21,7 +22,7 @@ const addStudentToClass = async ({ studentId, classId }) => {
             studentMatricNumber: student.matricNumber,
             studentCourse: student.course,
             studentLevel: student.level,
-            time: Date.now().toString()
+            time: moment()
         }
         const foundClass = await Class.findById(classId)
         const found = foundClass.participants.find((stu) => stu.studentMatricNumber === studentId)
