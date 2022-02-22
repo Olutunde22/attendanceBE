@@ -1,7 +1,6 @@
 import Student from '../models/student.js'
-import { translateError } from './util.js'
 
-const addStudent = async ({ firstName, lastName, matricNumber, level, course, qrCode }) => {
+const addStudent = async ({ firstName, lastName, matricNumber, level, course, barCode }) => {
     try {
         const student = new Student({
             firstName,
@@ -9,7 +8,7 @@ const addStudent = async ({ firstName, lastName, matricNumber, level, course, qr
             matricNumber,
             level,
             course,
-            qrCode
+            barCode
         })
         await student.save()
     } catch (error) {
