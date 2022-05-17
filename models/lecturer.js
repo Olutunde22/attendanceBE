@@ -28,8 +28,8 @@ const lecturerSchema = new mongoose.Schema(
 		disabled: {
 			type: Boolean,
 			required: true,
-      enum: ['true', 'false'],
-      default: false
+			enum: [true, false],
+			default: false
 		},
 		salt: String,
 	},

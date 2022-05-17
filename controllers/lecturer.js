@@ -65,7 +65,7 @@ const forgotPassword = async (req, res) => {
 			res.status(400).json({ message: 'Email not found' });
 		}
 	} else {
-		return res.status(200).send({ message: lecturer[1] });
+		return res.status(200).send({ resetId: lecturer[1] });
 	}
 };
 

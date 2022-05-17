@@ -55,23 +55,12 @@ const verifyPassword = (lecturerPassword, hashedPassword) => {
 const forgotPassword = async ({ email }) => {
 	try {
 		const foundLecturer = await Lecturer.findOne({ email: email });
+		if (!foundLecturer) {
+			return [false, 'This user does not exist']
+		}
 		foundLecturer.disabled = true;
-		const transporter = createTransport({
-			service: 'gmail',
-			auth: {
-				user: process.env.NODE_USER,
-				pass: process.env.NODE_PASSWORD,
-			},
-		});
-		let message = {
-			from: 'IT department <no-reply@school.com>',
-			to: email,
-			subject: 'Forgot Password',
-			text: `Please click on this link to change your password https://attendance-rho.vercel.app/changepassword/${foundLecturer.token}`,
-		};
-		await transporter.sendMail(message);
 		foundLecturer.save();
-		return [true, 'Please check your email to continue the process'];
+		return [true, foundLecturer.token ];
 	} catch (err) {
 		return [false, err];
 	}
@@ -80,6 +69,7 @@ const forgotPassword = async ({ email }) => {
 const changePassword = async ({ token, password }) => {
 	try {
 		const foundLecturer = await Lecturer.findOne({ token: token });
+		if (!foundLecturer) return [false, 'This token does not exist, please request for a new token']
 		const hashed = await hashPassword(password);
 		foundLecturer.salt = hashed.salt;
 		foundLecturer.password = hashed.password;
