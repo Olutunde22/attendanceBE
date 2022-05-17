@@ -21,6 +21,6 @@ router.post('/api/createclass', newClass.createClass)
 
 router.post('/api/forgot', lecturer.forgotPassword)
 
-router.post('/api/reset/:token', user.changePassword)
+router.post('/api/reset/:token', lecturer.changePassword)
 
 export default router
