@@ -4,7 +4,6 @@ const studentSchema = new mongoose.Schema(
 	{
 		firstName: String,
 		lastName: String,
-		picture: String,
 		matricNumber: {
 			type: String,
 			lowercase: true,
