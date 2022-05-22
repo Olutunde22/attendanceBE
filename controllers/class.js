@@ -1,7 +1,7 @@
 import Class from '../services/class.js'
 
 const createClass = async (req, res) => {
-    const newClass = await Class.create({ ...req.body })
+    const newClass = await Class.create(req.body)
     if (newClass === false) {
         return res.status(400).json({ message: 'Error Creating class' })
     } else {
