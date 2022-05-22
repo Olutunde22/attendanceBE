@@ -13,10 +13,10 @@ const studentSchema = new mongoose.Schema(
 		},
 		course: String,
 		level: String,
-		barCode: {
+		qrCode: {
 			type: String,
 			unique: true,
-			required: [true, 'A barCode is required for every student'],
+			required: [true, 'A qrCode is required for every student'],
 		},
 	},
 	{ timestamps: true } //This stores the createdAt and updatedAt time of the model
