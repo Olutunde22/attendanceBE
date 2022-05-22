@@ -13,7 +13,6 @@ const addStudent = async ({ firstName, lastName, matricNumber, level, course, qr
 		await student.save();
 		return true;
 	} catch (error) {
-        console.log(error)
 		return false;
 	}
 };
