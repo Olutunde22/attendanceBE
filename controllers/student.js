@@ -1,7 +1,9 @@
 import Student from '../services/student.js'
 
 const addStudent = async (req, res) => {
+    console.log(req.body)
     const student = await Student.addStudent({ ...req.body })
+    
     if (student === false) {
         return res.status(400).json({ message: 'Matric Number already Exists' })
     }else{
