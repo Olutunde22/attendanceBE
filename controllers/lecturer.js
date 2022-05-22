@@ -59,11 +59,7 @@ const forgotPassword = async (req, res) => {
 	const lecturer = await Lecturer.forgotPassword({ email });
 
 	if (lecturer[0] === false) {
-		if ('errno' in lecturer[1]) {
-			res.status(400).json({ message: 'Error while trying to send a mail' });
-		} else {
-			res.status(400).json({ message: 'Email not found' });
-		}
+		res.status(400).json({ message: lecturer[1] });
 	} else {
 		return res.status(200).send({ resetId: lecturer[1] });
 	}
