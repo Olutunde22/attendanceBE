@@ -7,6 +7,10 @@ const router = express.Router()
 
 router.get('/api/getclasses/:id', newClass.getClasses)
 
+router.get('/api/students', student.getStudents)
+
+router.get('/api/student/:studentId/lecturer/:lecturerId', student.getStudent)
+
 router.get('/api/getclassparticipants/:id', newClass.getClassParticipants)
 
 router.post('/api/signup', lecturer.signup)
