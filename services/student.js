@@ -20,7 +20,7 @@ const addStudent = async ({ firstName, lastName, matricNumber, level, course, qr
 
 const getStudents = async ({ matricNum }) => {
 	try {
-		return await Student.find({ matricNumber: matricNum })
+		return await Student.find({ matricNumber: { $regex: '.*' + matricNum + '.*' } })
 	}
 	catch (err) {
 
